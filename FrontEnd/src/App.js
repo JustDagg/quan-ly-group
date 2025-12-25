@@ -47,7 +47,7 @@ function App() {
                 <Route path="dashboard" element={<DashboardWithLoading />} />
                 <Route path="user-info" element={<UserWithLoading />} />
                 <Route path="list-groups" element={<ListGroupsWithLoading />} />
-                <Route path="password-changing" element={<PasswordChangingWithLoading />} />
+                <Route path="change-password" element={<PasswordChangingWithLoading />} />
             </Route>
         </Routes>
     );

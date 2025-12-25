@@ -10,13 +10,13 @@ export const menuLinks = [
         icon: 'fa-solid fa-user'
     },
     {
-        text: 'List Groups',
+        text: 'List Group',
         link: '/list-groups',
         icon: 'fa-solid fa-layer-group'
     },
     {
         text: 'Change Password',
-        link: '/password-changing',
+        link: '/change-password',
         icon: 'fa fa-key'
     }
 ]

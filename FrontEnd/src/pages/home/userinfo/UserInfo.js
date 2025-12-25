@@ -65,13 +65,15 @@ const UserInfo = (props) => {
                     <img src={avatarUrl} />
                     <div className="upload">
                         <label htmlFor="file_id">
-                            <RiFolderUploadFill color="gray" fontSize="1.2em" className="icon-upload" />
+                            <RiFolderUploadFill
+                                title="Click here to upload avatar"
+                                color="blue"
+                                fontSize="1.75em"
+                                className="icon-upload"
+                            />
                         </label>
                         <input type="file" name="file" id="file_id" onChange={onFileChange} />
                     </div>
-                </div>
-                <div className="icon-plus">
-                    <span>+</span>
                 </div>
                 <div className="content">
                     <form className="form-update">
@@ -161,8 +163,8 @@ const StyledUserInfo = styled(UserInfo)`
 
     .about-user h1 {
         text-align: center;
-        color: rgba(0, 0, 0, .4);
         font-size: 24px;
+        font-weight: 700
     }
 
     .about-user p {
@@ -173,27 +175,9 @@ const StyledUserInfo = styled(UserInfo)`
     }
 
     .form-update {
-        width: 60%;
-        margin: auto;
-    }
-    
-    .icon-plus {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        background-color: #9e27b0;
-        position: absolute;
-        top: 27%;
-        right: 2rem;
-        color: #fff;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-    }
-
-    .icon-plus span {
-        font-size: 1.6rem;
+        width: 90%;
+        margin-left: 30px;
+        margin-top: 30px;
     }
 
     .avatar {
@@ -290,7 +274,7 @@ const StyledUserInfo = styled(UserInfo)`
     .icon-upload {
         position: absolute;
         left: 50%;
-        bottom: -17px;
+        bottom: -30px;
         cursor: pointer;
         transform: translate(-50%, 0);
         z-index: 3;

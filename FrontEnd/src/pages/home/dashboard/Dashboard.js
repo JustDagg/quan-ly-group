@@ -42,13 +42,14 @@ const Dashboard = (props) => {
     return (
         <div className={props.className}>
             <form className="content">
-                <h3 style={{
+                <h2 style={{
                     fontWeight: 'bold',
                     borderBottom: '5px solid blue',
-                    paddingBottom: '5px'
+                    paddingBottom: '10px',
+                    textTransform: "uppercase"
                 }}>
                     Overview
-                </h3>
+                </h2>
                 <div style={{ backgroundColor: 'black', cursor: 'pointer' }} className='stat-item'>
                     <h4 style={{ color: 'whitesmoke' }}>Total Members Of Groups</h4>
                     <p style={{ color: 'red', fontWeight: 'bold' }}>{totalMembers}</p>

@@ -281,7 +281,7 @@ const ListGroups = (props) => {
                     </Table>
                 </TableContainer>
 
-                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
+                <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '20px' }}>
                     {/* Total Members */}
                     <Typography
                         variant="body2"

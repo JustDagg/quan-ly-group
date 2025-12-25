@@ -1,15 +1,17 @@
 import { MdLogout } from 'react-icons/md';
 import { Avatar, Box, IconButton, Tooltip } from '@mui/material';
 import { MdMenu } from 'react-icons/md';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import Dropdown from '../dropdown/Dropdown';
 import './Header.css';
 import viewActions from '../../../actions/viewActions';
+import userActions from "../../../actions/userActions"
 
 const Header = (props) => {
+    const [avatarUrl, setAvatarUrl] = useState('')
     const clickMenuIcon = () => {
         props.toggleSidebar();
     }
@@ -32,6 +34,15 @@ const Header = (props) => {
 
         window.location.replace('/sign-in');
     }
+
+    // setAvatarUrl to get data
+    useEffect(() => {
+        if (props.user.avatarUrl != null && props.user.avatarUrl != '') {
+            let avatarUrl = props.user.avatarUrl
+            let temp = avatarUrl.split('\\')
+            setAvatarUrl(temp[temp.length - 2] + '/' + temp[temp.length - 1])
+        }
+    }, [props.user])
 
     return (
         <div className='header'>
@@ -65,20 +76,26 @@ const Header = (props) => {
                                     },
                                 }}
                             >
-                                <MdLogout size={20} />
+                                <MdLogout size={30} />
                             </IconButton>
                         </Tooltip>
 
                         <Tooltip title="Account">
                             <IconButton onClick={_onClickAvatar} size="small">
                                 <Avatar
-                                    src="../../images/avatar.png"
+                                    src={avatarUrl}
                                     alt="avatar"
                                     sx={{
-                                        width: 36,
-                                        height: 36,
-                                        border: "2px solid",
+                                        width: 40,
+                                        height: 40,
+                                        border: "1px solid",
                                         borderColor: "primary.main",
+                                        bgcolor: "transparent",
+                                        "& img": {
+                                            objectFit: "cover",
+                                            width: "100%",
+                                            height: "100%",
+                                        },
                                     }}
                                 />
                             </IconButton>
@@ -94,12 +111,23 @@ const Header = (props) => {
     )
 }
 
-const mapDispatchToProps = (dispatch, props) => {
+const mapStateToProps = (state) => {
     return {
+        isLoading: state.userInfo.isLoading,
+        user: state.userInfo.user,
+        errorMessage: state.userInfo.errorMessage,
+    }
+}
+
+const mapDispathToProps = (dispatch, props) => {
+    return {
+        getUserInfo: (avatarURL) => {
+            dispatch(userActions.getUserInfo(avatarURL))
+        },
         toggleSidebar: () => {
             dispatch(viewActions.toggleSidebar())
         }
     }
 }
 
-export default connect(null, mapDispatchToProps)(Header);
+export default connect(mapStateToProps, mapDispathToProps)(Header);
