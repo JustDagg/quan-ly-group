@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react'
+
 import './CustomInput.css'
 
 function CustomInput(props) {
     const [value, setValue] = useState('')
-
     const [inputFocus, setInputFocus] = useState(false)
-    
     const [allowed, setAllowed] = useState(false)
 
     const _onChange = (e) => {
@@ -23,7 +22,7 @@ function CustomInput(props) {
 
         if (value != null && value !== '') {
             setAllowed(true);
-        }else setAllowed(false);
+        } else setAllowed(false);
     }
 
     useEffect(() => {
@@ -33,20 +32,20 @@ function CustomInput(props) {
         else setAllowed(false);
     }, [props.value])
 
-    return(
+    return (
         <div className="formcontrol-input">
-            <label 
+            <label
                 className={
-                    inputFocus ? 'label active' : 
-                    (allowed ? 'label allowed' : 'label')
+                    inputFocus ? 'label active' :
+                        (allowed ? 'label allowed' : 'label')
                 }
             >
                 {props.label}
             </label>
             <div className='input-item'>
                 <input
-                    className={inputFocus ? 'active' : 
-                    (allowed ? 'allowed' : '')}
+                    className={inputFocus ? 'active' :
+                        (allowed ? 'allowed' : '')}
                     type={props.type}
                     name={props.name}
                     value={value}
@@ -55,8 +54,8 @@ function CustomInput(props) {
                     onBlur={_onBlur}
                 />
                 <fieldset className={
-                    inputFocus ? 'active' : 
-                    (allowed ? 'allowed' : '')
+                    inputFocus ? 'active' :
+                        (allowed ? 'allowed' : '')
                 }>
                     <legend>
                         <span>{props.label}</span>

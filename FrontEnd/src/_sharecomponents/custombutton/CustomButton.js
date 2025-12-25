@@ -1,4 +1,4 @@
-import react, { Component } from 'react';
+import { Component } from 'react';
 
 import './CustomButton.css';
 
@@ -11,20 +11,15 @@ class CustomButton extends Component {
     }
 
     render() {
-        //const width = this.props.width;
-        //const type = this.props.type;
-        const { 
-            width, 
-            type, 
-            uppercase, 
-            large, 
-            color, 
-            //children,
+        const {
+            width,
+            type,
+            uppercase,
+            large,
+            color,
             ...otherProps
-            
-        } = this.props;
 
-        //const { title } = this.props;
+        } = this.props;
 
         return (
             <button

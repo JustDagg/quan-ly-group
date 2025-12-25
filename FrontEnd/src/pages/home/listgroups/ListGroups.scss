@@ -1,153 +1,147 @@
 .list-groups {
-    .content {
-        width: fit-content;
-        min-width: 600px;
-        margin: auto;
-        margin-top: 50px;
+  .content {
+    width: fit-content;
+    min-width: 1000px;
+    margin: auto;
+    margin-top: 50px;
 
-        table {
-            width: 100%;
-            border: 1px solid #dddddd;
-            border-collapse: collapse;
-            box-shadow: 0 2px 5px rgb(0 0 0 /14%);
-        }
-
-        table td,
-        table th {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: center;
-        }
-
-        table tbody tr:nth-child(even) {
-            background-color: rgba(0, 0, 0, .05);
-        }
-
-        table tbody tr:hover {
-            background-color: #e6e7e9;
-        }
-
-        table thead th:last-child {
-            min-width: 100px;
-        }
-
-        table thead th:nth-child(n+2) {
-            min-width: 150px;
-        }
-
-        .icon-add {
-            text-align: right;
-        }
-
-        .filter-form {
-            position: relative;
-            display: flex;
-            width: fit-content;
-            justify-content: space-around;
-            margin-top: 30px;
-        }
-
-        .type-filter {
-            position: relative;
-            display: flex;
-            width: fit-content;
-        }
-
-        .type-filter select {
-            width: 150px;
-        }
-
-        .form-control-filter {
-            outline: none;
-            border-radius: 3px;
-            padding: 5px 20px 5px 8px;
-            border: 1px solid lightgray;
-            cursor: pointer;
-        }
-
-        .react-datepicker__input-container input {
-            outline: none;
-            border: 1px solid lightgray;
-            padding: 5px 20px 5px 8px !important;
-            height: 35px !important;
-            width: 100%;
-        }
-
-        .react-datepicker__input-container {
-            width: 150px !important;
-            margin-left: 20px;
-        }
-
-        .icon-close {
-            position: absolute;
-            font-size: 11px;
-            cursor: pointer;
-            top: 10px;
-            right: 20px;
-            color: gray;
-        }
-
-        .icon-serach {
-            display: flex;
-            align-items: center;
-            margin-left: 10px;
-        }
-
-        .icon-serach svg {
-            cursor: pointer;
-        }
-
-        .paging {
-            display: flex;
-            justify-content: center;
-            padding: 10px 0px 50px 0px;
-            cursor: pointer;
-        }
-
-        .pagination {
-            display: flex;
-            list-style: none;
-            padding: 0;
-        }
-
-        .pagination li {
-            margin: 0 5px;
-        }
-
-        .pagination li a {
-            padding: 8px 12px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            color: #333;
-            text-decoration: none;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
-
-        .pagination li a:hover {
-            background-color: #007bff;
-            color: white;
-        }
-
-        .pagination li.active a {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
-        }
-
-        .pagination li.disabled a {
-            color: #ccc;
-            cursor: not-allowed;
-        }
-
-        .pagination li.previous a,
-        .pagination li.next a {
-            font-weight: bold;
-        }
-
-        .pagination li.active {
-            pointer-events: none;
-        }
+    table {
+      width: 100%;
+      border: 1px solid #dddddd;
+      border-collapse: collapse;
+      box-shadow: 0 2px 5px rgb(0 0 0 /14%);
     }
 
+    table td,
+    table th {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: center;
+    }
 
+    table tbody tr:nth-child(even) {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+
+    table tbody tr:hover {
+      background-color: #e6e7e9;
+    }
+
+    table thead th:last-child {
+      min-width: 100px;
+    }
+
+    table thead th:nth-child(n + 2) {
+      min-width: 150px;
+    }
+
+    .icon-add {
+      text-align: right;
+    }
+
+    .filter-form {
+      position: relative;
+      display: flex;
+      width: fit-content;
+      justify-content: space-around;
+      margin-top: 30px;
+    }
+
+    .type-filter {
+      position: relative;
+      display: flex;
+      width: fit-content;
+      border: 1px solid lightgray;
+    }
+
+    .form-control-filter {
+      outline: none;
+      border-radius: 3px;
+      padding: 5px 20px 5px 8px;
+      border: 1px solid lightgray;
+      cursor: pointer;
+    }
+
+    .react-datepicker__input-container input {
+      outline: none;
+      border: 1px solid lightgray;
+      padding: 5px 20px 5px 8px !important;
+      width: 100%;
+    }
+
+    .react-datepicker__input-container {
+      width: 150px !important;
+      margin-left: 20px;
+    }
+
+    .icon-close {
+      position: absolute;
+      font-size: 11px;
+      cursor: pointer;
+      top: 10px;
+      right: 20px;
+      color: gray;
+    }
+
+    .icon-serach {
+      display: flex;
+      align-items: center;
+      margin-left: 10px;
+    }
+
+    .icon-serach svg {
+      cursor: pointer;
+    }
+
+    .paging {
+      display: flex;
+      justify-content: center;
+      padding: 10px 0px 50px 0px;
+      cursor: pointer;
+    }
+
+    .pagination {
+      display: flex;
+      list-style: none;
+      padding: 0;
+    }
+
+    .pagination li {
+      margin: 0 5px;
+    }
+
+    .pagination li a {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      color: #333;
+      text-decoration: none;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    .pagination li a:hover {
+      background-color: #007bff;
+      color: white;
+    }
+
+    .pagination li.active a {
+      background-color: #007bff;
+      color: white;
+      border-color: #007bff;
+    }
+
+    .pagination li.disabled a {
+      color: #ccc;
+      cursor: not-allowed;
+    }
+
+    .pagination li.previous a,
+    .pagination li.next a {
+      font-weight: bold;
+    }
+
+    .pagination li.active {
+      pointer-events: none;
+    }
+  }
 }

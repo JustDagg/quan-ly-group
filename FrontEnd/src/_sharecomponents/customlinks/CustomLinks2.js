@@ -1,7 +1,7 @@
-import { NavLink, Outlet } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 import styled from 'styled-components'
 
-const GroupLink = styled.div `
+const GroupLink = styled.div`
     .menu-item {
         -webkit-display: flex;
         display: flex;
@@ -31,15 +31,10 @@ const GroupLink = styled.div `
 `
 
 const CustomLinks2 = (props) => {
-
-    // console.log('props with router: ')
-
-    // console.log(props)
-    
     return (
         <GroupLink>
             {
-                props.menuLinks.map((item, index) => 
+                props.menuLinks.map((item, index) =>
                     <NavLink key={index} to={item.link} className={({ isAcitve }) => isAcitve ? 'menu-item active' : 'menu-item'}>
                         <i className={item.icon}></i>
                         <span>{item.text}</span>

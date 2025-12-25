@@ -1,4 +1,3 @@
-
 .formcontrol-input {
     position: relative;
 }
@@ -21,7 +20,8 @@ input {
     padding: 0 14px;
 }
 
-input.active,  input.allowed{
+input.active,
+input.allowed {
     border-color: transparent;
 }
 
@@ -74,4 +74,3 @@ fieldset span {
     padding: 0 5px 0 5px;
     visibility: hidden;
 }
-

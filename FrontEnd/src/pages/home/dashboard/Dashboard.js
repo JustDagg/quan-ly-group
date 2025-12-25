@@ -1,5 +1,6 @@
-import styled from "styled-components";
 import { useEffect, useState } from "react";
+import styled from "styled-components";
+
 import axios from "../../../../node_modules/axios/index";
 
 const Dashboard = (props) => {
@@ -19,9 +20,10 @@ const Dashboard = (props) => {
 
                 console.log(groups);
 
-                // Calculate totals
+                // calculate totals
                 setTotalMembers(groups.reduce((acc, group) => acc + group.totalMember, 0)); // totalMembers
-                setTotalGroups(groups.length); // totalGroups
+                // totalGroups
+                setTotalGroups(groups.length);
                 setTotalTypes(new Set(groups.map(group => group.type)).size); // totalTypes
 
             } catch (err) {
@@ -40,34 +42,29 @@ const Dashboard = (props) => {
     return (
         <div className={props.className}>
             <form className="content">
-                <div className='group-overview'>
-                    <h3 style={{
-                        fontSize: '45px',
-                        fontWeight: 'bold',
-                        borderBottom: '5px solid blue',
-                        paddingBottom: '5px'
-                    }}>
-                        Overview
-                    </h3>
-                    <div className='overview-stats'>
-                        <div style={{ backgroundColor: 'black', cursor: 'pointer' }} className='stat-item'>
-                            <h4 style={{ color: 'whitesmoke' }}>Total Members Of Groups</h4>
-                            <p style={{ color: 'red', fontWeight: 'bold' }}>{totalMembers}</p>
-                        </div>
-                        <div style={{ backgroundColor: 'black', cursor: 'pointer' }} className='stat-item'>
-                            <h4 style={{ color: 'whitesmoke' }}>Total Groups</h4>
-                            <p style={{ color: 'yellow', fontWeight: 'bold' }}>{totalGroups}</p>
-                        </div>
-                        <div style={{ backgroundColor: 'black', cursor: 'pointer' }} className='stat-item'>
-                            <h4 style={{ color: 'whitesmoke' }}>Total Types</h4>
-                            <p style={{ color: 'green', fontWeight: 'bold' }}>{totalTypes}</p>
-                        </div>
-                    </div>
+                <h3 style={{
+                    fontWeight: 'bold',
+                    borderBottom: '5px solid blue',
+                    paddingBottom: '5px'
+                }}>
+                    Overview
+                </h3>
+                <div style={{ backgroundColor: 'black', cursor: 'pointer' }} className='stat-item'>
+                    <h4 style={{ color: 'whitesmoke' }}>Total Members Of Groups</h4>
+                    <p style={{ color: 'red', fontWeight: 'bold' }}>{totalMembers}</p>
+                </div>
+                <div style={{ backgroundColor: 'black', cursor: 'pointer' }} className='stat-item'>
+                    <h4 style={{ color: 'whitesmoke' }}>Total Groups</h4>
+                    <p style={{ color: 'yellow', fontWeight: 'bold' }}>{totalGroups}</p>
+                </div>
+                <div style={{ backgroundColor: 'black', cursor: 'pointer' }} className='stat-item'>
+                    <h4 style={{ color: 'whitesmoke' }}>Total Types</h4>
+                    <p style={{ color: 'green', fontWeight: 'bold' }}>{totalTypes}</p>
                 </div>
             </form>
         </div>
     );
-}
+};
 
 const DashboardStyled = styled(Dashboard)`
     height: calc(100vh - 108px);

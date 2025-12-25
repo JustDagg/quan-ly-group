@@ -9,28 +9,22 @@ import org.springframework.web.multipart.MultipartFile;
 import com.npv.utils.FileManager;
 
 @Service
-public class FileService implements IFileService{
-	
+public class FileService implements IFileService {
+
 	private FileManager fileManager = new FileManager();
-	
-	//private String linkFolder = "E:\\VTI\\Rocket20\\Reactjs\\Buoi11\\public\\upload";
-	
-//	private String linkFolder = "C:\\Users\\BienCao-NamViet\\Desktop\\Ra41-React\\ReactJs-FinalExam-Formik\\public\\upload";
-	
-	private String linkFolder = "C:\\Users\\Admin\\Desktop\\VTI ReactJS\\Thi\\FinalExamFinal\\public\\images\\upload";
+
+	private String uploadDir = "C:/Users/Admin/Desktop/IMG/public/images/upload";
 
 	@Override
 	public String upLoadImage(MultipartFile image) throws IOException {
-		String nameImage = new Date().getTime() + "." + fileManager.getFormatFile(image.getOriginalFilename());
 
-		String path = linkFolder + "\\" + nameImage;
+		String nameImage = System.currentTimeMillis() + "." +
+				fileManager.getFormatFile(image.getOriginalFilename());
 
-		fileManager.createNewMultiPartFile(path, image);
+		String filePath = uploadDir + "/" + nameImage;
 
-		// TODO save link file to database
+		fileManager.createNewMultiPartFile(filePath, image);
 
-		// return link uploaded file
-		return path;
+		return "/upload/" + nameImage;
 	}
-
 }

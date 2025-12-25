@@ -1,5 +1,10 @@
 export const menuLinks = [
     {
+        text: 'Dashboard',
+        link: '/dashboard',
+        icon: 'fa-solid fa-chart-line'
+    },
+    {
         text: 'User Info',
         link: '/user-info',
         icon: 'fa-solid fa-user'

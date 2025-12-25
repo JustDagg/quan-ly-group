@@ -10,89 +10,60 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    /* height: 100vh; */
 }
 
 .home-main.sidebar-close {
     margin-left: 0;
 }
 
-.main-content {
-    /* height: 100vh; */
-}
-
 .group-overview {
     background-color: #ffffff;
-    /* White background for contrast */
     border-radius: 10px;
-    /* Rounded corners */
     box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
-    /* Soft shadow for depth */
     padding: 20px;
     margin-top: 20px;
-    /* Space above the section */
 }
 
 .group-overview h3 {
     text-align: center;
     color: #333;
-    /* Dark text color */
     font-size: 1.5rem;
-    /* Larger heading */
     margin-bottom: 20px;
-    /* Space below the heading */
 }
 
 .overview-stats {
     display: flex;
     justify-content: space-between;
-    /* Space items evenly */
     margin: 100px 0;
-    /* Space around the stats */
     flex-wrap: wrap;
-    /* Wrap items on smaller screens */
 }
 
 .stat-item {
     background-color: #f9f9f9;
-    /* Light background for each stat */
     border-radius: 10px;
-    /* Rounded corners */
     box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow */
     padding: 15px;
     text-align: center;
-    /* Center align text */
     flex: 1 1 30%;
-    /* Allow items to grow and shrink */
     margin: 10px;
-    /* Space between items */
     transition: transform 0.2s;
-    /* Animation for hover */
 }
 
 .stat-item:hover {
     transform: scale(1.05);
-    /* Slightly enlarge on hover */
 }
 
 .stat-icon {
     font-size: 2rem;
-    /* Icon size */
     color: #39f;
-    /* Icon color */
 }
 
 .stat-item h4 {
     font-size: 1.2rem;
-    /* Slightly larger for emphasis */
     margin-bottom: 5px;
-    /* Space below the title */
 }
 
 .stat-item p {
     font-size: 1.5rem;
-    /* Large font size for numbers */
     color: #333;
-    /* Dark color for numbers */
 }

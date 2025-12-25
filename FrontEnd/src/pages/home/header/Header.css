@@ -1,12 +1,12 @@
 .header {
-    height: 108px;
+    height: 58px;
     position: sticky;
     top: 0;
     left: 0;
-    background-color: #fff;
+    background-color: #ffffff;
     box-shadow: 0 2px 2px 0 rgb(60 75 100 / 14%),
-    0 3px 1px -2px rgb(60 75 100 / 12%),
-    0 1px 5px 0 rgb(60 75 100 / 20%);
+        0 3px 1px -2px rgb(60 75 100 / 12%),
+        0 1px 5px 0 rgb(60 75 100 / 20%);
     z-index: 9999;
 }
 
@@ -32,20 +32,63 @@
 
 .nav-left {
     display: flex;
-    justify-content: space-between;
     align-items: center;
-    /* width: 300px; */
+    gap: 1.25rem;
 }
 
-.nav-left a{
-    color: rgb(0, 0, 0, .5);
+/* Menu icon */
+.menu-icon {
+    font-size: 1.6rem;
+    cursor: pointer;
+    color: rgba(0, 0, 0, 0.6);
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.menu-icon:hover {
+    color: #1976d2;
+    transform: scale(1.05);
+}
+
+/* Links */
+.nav-left a {
+    position: relative;
+    color: rgba(0, 0, 0, 0.6);
     text-decoration: none;
-    line-height: 1.6;
-    margin-left: 1rem;
+    font-size: 18px;
+    font-weight: 500;
+    padding: 6px 4px;
+    transition: color 0.25s ease;
 }
 
-.nav-left a:hover{
-    color: rgba(222, 21, 21, 0.76);
+/* Hover */
+.nav-left a:hover {
+    color: #1976d2;
+}
+
+/* Underline animation */
+.nav-left a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background-color: #1976d2;
+    transition: width 0.25s ease;
+}
+
+.nav-left a:hover::after {
+    width: 100%;
+}
+
+/* Active */
+.nav-left a.active {
+    color: #1976d2;
+    font-weight: 600;
+}
+
+.nav-left a.active::after {
+    width: 100%;
 }
 
 .nav-right img {

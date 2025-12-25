@@ -1,18 +1,18 @@
 import { useState } from "react"
+
 import './WithLoading.css'
 
 const WithLoading = (WrappedComponent) => {
     const WithLoadingCoponent = (props) => {
         const [isLoading, setIsLoading] = useState(false);
-        
+
         const handleShowLoading = (isLoading) => {
             setIsLoading(isLoading)
-            //setIsLoading(true)
         }
 
         return (
             <div className="loading-container">
-                {   
+                {
                     isLoading &&
                     <div className="loading-content">
                         <div className="loading-main">
@@ -21,7 +21,7 @@ const WithLoading = (WrappedComponent) => {
                         </div>
                     </div>
                 }
-                <WrappedComponent {...props} showLoading={handleShowLoading}/>
+                <WrappedComponent {...props} showLoading={handleShowLoading} />
             </div>
         )
     }

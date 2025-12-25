@@ -1,24 +1,18 @@
-import FormGroup from "../../_sharecomponents/formgroup/FromGroup";
-import CustomInput from "../../_sharecomponents/custominput/CustomInput";
-
-import styled from 'styled-components'
-
-import { MdGroupAdd } from 'react-icons/md'
-
-import CustomButton from "../../_sharecomponents/custombutton/CustomButton";
-
-import { Link } from "react-router-dom";
-
-import { useState, useEffect } from "react";
-
-import userActions from "../../actions/userActions";
-
 import { connect } from 'react-redux';
-
+import { FormControl, FormHelperText, MenuItem, Select } from '@mui/material';
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import styled from 'styled-components'
+import { MdGroupAdd } from 'react-icons/md'
+import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
-const SingupContainer = styled.div `
+import FormGroup from "../../_sharecomponents/formgroup/FromGroup";
+import CustomInput from "../../_sharecomponents/custominput/CustomInput";
+import CustomButton from "../../_sharecomponents/custombutton/CustomButton";
+import userActions from "../../actions/userActions";
+
+const SingupContainer = styled.div`
     max-width: 400px;
     margin: auto;
     margin-top: 1.5rem;
@@ -98,10 +92,6 @@ const SingupContainer = styled.div `
 `;
 
 const Signup = (props) => {
-    const EnumRole = {
-        admin: 'ADMIN', manager: 'MANAGER', employee: 'EMPLOYEE'
-    }
-    
     const formik = useFormik({
         initialValues: {
             firstName: '',
@@ -113,9 +103,9 @@ const Signup = (props) => {
         },
         validationSchema: Yup.object({
             firstName: Yup.string()
-              .min(2, "Mininum 2 characters")
-              .max(15, "Maximum 15 characters")
-              .required("Required!"),
+                .min(2, "Mininum 2 characters")
+                .max(15, "Maximum 15 characters")
+                .required("Required!"),
 
             lastName: Yup.string()
                 .min(2, "Mininum 2 characters")
@@ -128,18 +118,18 @@ const Signup = (props) => {
                 .required("Required!"),
 
             email: Yup.string()
-              .email("Invalid email format")
-              .required("Required!"),
+                .email("Invalid email format")
+                .required("Required!"),
 
             password: Yup.string()
-              .min(6, "Minimum 6 characters")
-              .required("Required!"),
+                .min(6, "Minimum 6 characters")
+                .required("Required!"),
 
             role: Yup.string()
                 .oneOf(['ADMIN', 'MANAGER', 'EMPLOYEE'])
                 .required()
         }),
-        
+
         onSubmit: values => {
             props.signup(values);
         }
@@ -154,19 +144,6 @@ const Signup = (props) => {
         role: ''
     })
 
-    const handleSubmitForm = (e) => {
-        e.preventDefault();
-        //Call Api
-        props.signup(userSignup)
-    }
-
-    const _onChangeInput = (e) => {
-        setUserSignup({
-            ...userSignup,
-            [e.target.name]: e.target.value
-        })
-    }
-
     useEffect(() => {
         props.showLoading(props.isLoading)
     }, [props.isLoading])
@@ -175,7 +152,7 @@ const Signup = (props) => {
         <SingupContainer>
             <div className="signup-header">
                 <div className="signup-avatar">
-                    <MdGroupAdd size='1.36rem'/>
+                    <MdGroupAdd size='1.36rem' />
                 </div>
                 <h1>Sign up</h1>
             </div>
@@ -189,7 +166,6 @@ const Signup = (props) => {
                             name='firstName'
                             value={formik.values.firstName}
                             onChangeInput={formik.handleChange}
-                            //onChangeInput={_onChangeInput}
                         />
                         {formik.errors.firstName && formik.touched.firstName && (
                             <p>{formik.errors.firstName}</p>
@@ -200,8 +176,6 @@ const Signup = (props) => {
                             label='Last Name *'
                             type='text'
                             name='lastName'
-                            // value=''
-                            // onChangeInput={_onChangeInput}
                             value={formik.values.lastName}
                             onChangeInput={formik.handleChange}
                         />
@@ -215,8 +189,6 @@ const Signup = (props) => {
                         label='Username *'
                         type='text'
                         name='username'
-                        // value=''
-                        // onChangeInput={_onChangeInput}
                         value={formik.values.username}
                         onChangeInput={formik.handleChange}
                     />
@@ -229,8 +201,6 @@ const Signup = (props) => {
                         label='Email *'
                         type='email'
                         name='email'
-                        // value=''
-                        // onChangeInput={_onChangeInput}
                         value={formik.values.email}
                         onChangeInput={formik.handleChange}
                     />
@@ -243,8 +213,6 @@ const Signup = (props) => {
                         label='Password *'
                         type='password'
                         name='password'
-                        // value=''
-                        // onChangeInput={_onChangeInput}
                         value={formik.values.password}
                         onChangeInput={formik.handleChange}
                     />
@@ -253,27 +221,41 @@ const Signup = (props) => {
                     )}
                 </FormGroup>
                 <FormGroup>
-                    <CustomInput
-                        label="Role *"
-                        type="text"
-                        name="role"
-                        // value=""
-                        // onChangeInput={_onChangeInput}
-                        value={formik.values.role}
-                        onChangeInput={formik.handleChange}
-                    />
-                    {formik.errors.role && formik.touched.role && (
-                        <p>{formik.errors.role}</p>
-                    )}
+                    <FormControl
+                        fullWidth
+                        size="small"
+                        error={formik.touched.role && Boolean(formik.errors.role)}
+                        sx={{ minWidth: 150, border: "1px solid lightgray" }}
+                    >
+                        <Select
+                            name="role"
+                            value={formik.values.role || ""}
+                            onChange={formik.handleChange}
+                            displayEmpty
+                            renderValue={(selected) =>
+                                selected ? selected : <span style={{ color: "#999" }}>Select role</span>
+                            }
+                        >
+                            <MenuItem value="" disabled>
+                                Select role
+                            </MenuItem>
+
+                            <MenuItem value="ADMIN">ADMIN</MenuItem>
+                            <MenuItem value="MANAGER">MANAGER</MenuItem>
+                            <MenuItem value="EMPLOYEE">EMPLOYEE</MenuItem>
+                        </Select>
+
+                        {formik.touched.role && formik.errors.role && (
+                            <FormHelperText>{formik.errors.role}</FormHelperText>
+                        )}
+                    </FormControl>
                 </FormGroup>
                 <div className="btn-submit">
-                    {/* <CustomButton title='Sign up'/> */}
                     <CustomButton
                         type="submit"
                         color="#ffffff"
                         width="100%"
                         uppercase
-                        //onClick={handleSubmitForm}
                     >
                         Sign up
                     </CustomButton>
@@ -284,15 +266,12 @@ const Signup = (props) => {
                     </Link>
                 </div>
                 <p className="copy-right"> Copyright &copy; &nbsp;
-                    <Link to="/">Your Wbsite</Link>&nbsp;2022
+                    <Link to="/">Your Website</Link>&nbsp;
                 </p>
-
             </form>
         </SingupContainer>
     )
 }
-
-//export default Signup
 
 const mapStateToProps = (state) => {
     return {

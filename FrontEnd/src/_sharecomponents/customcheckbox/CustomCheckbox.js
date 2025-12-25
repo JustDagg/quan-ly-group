@@ -1,4 +1,4 @@
-import react , { Component } from 'react'
+import react, { Component } from 'react'
 
 import { MdCheckBoxOutlineBlank } from 'react-icons/md'
 import { MdCheckBox } from 'react-icons/md'
@@ -37,10 +37,10 @@ class CustomCheckbox extends Component {
             <div className='checkbox' onClick={() => this._onClick()}>
                 <div>
                     {
-                        this.state.checked ? <MdCheckBox className='checkbox-checked' size={fontSize}/> :
-                        <MdCheckBoxOutlineBlank size={fontSize}/>
+                        this.state.checked ? <MdCheckBox className='checkbox-checked' size={fontSize} /> :
+                            <MdCheckBoxOutlineBlank size={fontSize} />
                     }
-                    
+
                 </div>
                 <span>{label}</span>
             </div>

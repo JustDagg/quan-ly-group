@@ -3,34 +3,9 @@ import axios from "axios";
 import constants from "../constants/constants";
 import viewActions from "./viewActions";
 
-import * as userAPIs from '../services/api/user/userAPIs';
-// const getUserInfo = (userId) => {
-//     return async(dispath) => {
-//         dispath({
-//             type: constants.GET_USRE_INFO_REUEST
-//         })
-
-//         try {
-//             const response = await axios.get('/api/accounts/' + userId)
-//             dispath({
-//                 type: constants.GET_USRE_INFO_SUCCESS,
-//                 payload: response.data
-//             })
-//         }catch (error) {
-//             dispath({
-//                 type: constants.GET_USRE_INFO_FAIL,
-//                 payload: {
-//                     statusCode: error.response.sttaus,
-//                     message: "Get user's info fail"
-//                 }
-//             })
-//         }
-//     }
-// }
-
 const token = localStorage.getItem('token')
 
-const getUserInfo = (username) => async(dispath) => {
+const getUserInfo = (username) => async (dispath) => {
     dispath({
         type: constants.GET_USRE_INFO_REUEST
     })
@@ -45,14 +20,14 @@ const getUserInfo = (username) => async(dispath) => {
             type: constants.GET_USRE_INFO_SUCCESS,
             payload: response.data
         })
-    }catch (error) {
+    } catch (error) {
         console.log(error.response)
         let messageError = ''
         if (error.response.status == 401) {
             messageError = 'Unauthorized! Please login first to receive tokens'
-        }else if (error.response.status == 500) {
+        } else if (error.response.status == 500) {
             messageError = `Get user's info fail. Internal server error!`
-        }else if (error.response.status == 403) {
+        } else if (error.response.status == 403) {
             messageError = `You don not have permission to access / on the server. Forbidden!`
         }
         dispath({
@@ -65,8 +40,7 @@ const getUserInfo = (username) => async(dispath) => {
     }
 }
 
-
-const updateUserInfo = (user, avatarUploadFile) => async(dispatch) => {
+const updateUserInfo = (user, avatarUploadFile) => async (dispatch) => {
     dispatch({
         type: constants.UPDATE_USER_INFO_REQUEST
     })
@@ -81,7 +55,7 @@ const updateUserInfo = (user, avatarUploadFile) => async(dispatch) => {
                 headers: {
                     'Authorization': 'Bearer ' + token
                 },
-                data : formData
+                data: formData
             })
             const response = await axios({
                 method: 'PUT',
@@ -101,13 +75,13 @@ const updateUserInfo = (user, avatarUploadFile) => async(dispatch) => {
                 }
             })
 
-            localStorage.setItem('avatarUrl', responseUpload.data )
+            localStorage.setItem('avatarUrl', responseUpload.data)
 
             dispatch({
                 type: constants.UPDATE_USER_INFO_SUCCESS,
-                payload: responseUpload.data 
+                payload: responseUpload.data
             })
-        }else {
+        } else {
             const response = await axios({
                 method: 'PUT',
                 url: '/api/accounts/' + user.id,
@@ -127,10 +101,10 @@ const updateUserInfo = (user, avatarUploadFile) => async(dispatch) => {
             })
             dispatch({
                 type: constants.UPDATE_USER_INFO_SUCCESS,
-                payload: response.data 
+                payload: response.data
             })
         }
-    }catch (error) {
+    } catch (error) {
         dispatch({
             type: constants.UPDATE_USER_INFO_FAIL,
             payload: 'Update user info fail'
@@ -139,19 +113,16 @@ const updateUserInfo = (user, avatarUploadFile) => async(dispatch) => {
             //Request made and server responsed
             console.log(error.response.data)
             console.log(error.response.status)
-        }else if (error.request) {
+        } else if (error.request) {
             //The request was made but no response was received
             console.log(error.request)
-        }else {
+        } else {
             console.log('Error', error.message)
         }
     }
 }
 
-
-
-const registerUser = (user) => async(dispath) => {
-    //console.log(user)
+const registerUser = (user) => async (dispath) => {
     dispath({
         type: constants.REGISTER_USER_REUEST
     })
@@ -167,7 +138,7 @@ const registerUser = (user) => async(dispath) => {
 
         window.location.replace('/sign-in')
 
-    }catch (error) {
+    } catch (error) {
         console.log(error)
         dispath({
             type: constants.REGISTER_USER_FAIL,
@@ -179,11 +150,11 @@ const registerUser = (user) => async(dispath) => {
     }
 }
 
-const signin = (username, password) => async(dispath) => {
+const signin = (username, password) => async (dispath) => {
     dispath({
         type: constants.SIGNIN_REQUEST
     })
-   
+
     try {
         const response = await axios.post('/api/auth/signin', {
             username: username,
@@ -205,7 +176,7 @@ const signin = (username, password) => async(dispath) => {
 
         window.location.replace('/')
 
-    }catch (error) {
+    } catch (error) {
         console.log(error);
         dispath({
             type: constants.SIGNIN_FAIL,
@@ -217,7 +188,7 @@ const signin = (username, password) => async(dispath) => {
     }
 }
 
-const getListGroups = (groupFilterForm) => async(dispath) => {
+const getListGroups = (groupFilterForm) => async (dispath) => {
     dispath({
         type: constants.GET_LIST_GROUP_REUEST
     })
@@ -226,20 +197,20 @@ const getListGroups = (groupFilterForm) => async(dispath) => {
         if (groupFilterForm) {
             let startDateConvert = null
             if (groupFilterForm.startDate != null) {
-                startDateConvert =  groupFilterForm.startDate.getDate() + '/' + (groupFilterForm.startDate.getMonth() + 1) + '/' + groupFilterForm.startDate.getFullYear()
+                startDateConvert = groupFilterForm.startDate.getDate() + '/' + (groupFilterForm.startDate.getMonth() + 1) + '/' + groupFilterForm.startDate.getFullYear()
             }
             let endDateConvert = null
             if (groupFilterForm.endDate != null) {
-                endDateConvert =  groupFilterForm.endDate.getDate() + '/' + (groupFilterForm.endDate.getMonth() + 1) + '/' + groupFilterForm.endDate.getFullYear()
+                endDateConvert = groupFilterForm.endDate.getDate() + '/' + (groupFilterForm.endDate.getMonth() + 1) + '/' + groupFilterForm.endDate.getFullYear()
             }
 
             /* Format input date to filter by DateTime example */
             // startDateConvert = '2022-05-15 09:12:03'
             // endDateConvert = '2022-05-20 09:27:15'
 
-            let url = 'http://localhost:8888/api/groups/paging?' + 
-            'pageNumber=' + groupFilterForm.pageNumber + '&size=' + groupFilterForm.pageSize + '&sort=' + groupFilterForm.sort + '&type=' +
-            groupFilterForm.type + '&startDate=' + startDateConvert + '&endDate=' + endDateConvert
+            let url = 'http://localhost:8888/api/groups/paging?' +
+                'pageNumber=' + groupFilterForm.pageNumber + '&size=' + groupFilterForm.pageSize + '&sort=' + groupFilterForm.sort + '&type=' +
+                groupFilterForm.type + '&startDate=' + startDateConvert + '&endDate=' + endDateConvert
 
             const response = await axios.get(url, {
                 headers: {
@@ -250,11 +221,11 @@ const getListGroups = (groupFilterForm) => async(dispath) => {
             dispath({
                 type: constants.GET_LIST_GROUP_SUCCESS,
                 payload: {
-                    listGroups: response.data.content,// Array group
-                    totalPagesListGroups: response.data.totalPages 
+                    listGroups: response.data.content,
+                    totalPagesListGroups: response.data.totalPages
                 }
             })
-        }else {
+        } else {
             let url = 'http://localhost:8888/api/groups'
 
             const response = await axios.get(url, {
@@ -267,11 +238,11 @@ const getListGroups = (groupFilterForm) => async(dispath) => {
                 type: constants.GET_LIST_GROUP_SUCCESS,
                 payload: {
                     listGroups: response.data,
-                    totalPagesListGroups: response.data.length // Array group
+                    totalPagesListGroups: response.data.length
                 }
             })
         }
-    }catch (error) {
+    } catch (error) {
         dispath({
             type: constants.GET_LIST_GROUP_FAIL,
             payload: {
@@ -282,7 +253,7 @@ const getListGroups = (groupFilterForm) => async(dispath) => {
     }
 }
 
-const updateGroup = (groupItem) => async(dispath) => {
+const updateGroup = (groupItem) => async (dispath) => {
     console.log(groupItem)
     dispath({
         type: constants.UPDATE_GROUP_REUEST
@@ -300,7 +271,7 @@ const updateGroup = (groupItem) => async(dispath) => {
                 name: groupItem.name,
                 type: groupItem.type,
                 createdAt: groupItem.createdAt,
-                totalMember: groupItem.totalMember    
+                totalMember: groupItem.totalMember
             })
         })
 
@@ -313,7 +284,7 @@ const updateGroup = (groupItem) => async(dispath) => {
 
         //close form
         dispath(viewActions.toggleFormGroup(false))
-    }catch (error) {
+    } catch (error) {
         dispath({
             type: constants.UPDATE_GROUP_FAIL,
             payload: {
@@ -324,7 +295,7 @@ const updateGroup = (groupItem) => async(dispath) => {
     }
 }
 
-const creatingGroup = (groupItem) => async(dispath) => {
+const creatingGroup = (groupItem) => async (dispath) => {
     console.log('create group: ')
     console.log(groupItem)
     dispath({
@@ -356,7 +327,7 @@ const creatingGroup = (groupItem) => async(dispath) => {
 
         //close form
         dispath(viewActions.toggleFormGroup(false))
-    }catch (error) {
+    } catch (error) {
         dispath({
             type: constants.CREATE_GROUP_FAIL,
             payload: {
@@ -367,7 +338,7 @@ const creatingGroup = (groupItem) => async(dispath) => {
     }
 }
 
-const deleteGroup = groupId => async(dispath) => {
+const deleteGroup = groupId => async (dispath) => {
     dispath({
         type: constants.DELETE_GROUP_REUEST
     })
@@ -392,7 +363,7 @@ const deleteGroup = groupId => async(dispath) => {
             payload: response.data
         })
 
-    }catch (error) {
+    } catch (error) {
         dispath({
             type: constants.DELETE_GROUP_FAIL,
             payload: {
@@ -403,7 +374,7 @@ const deleteGroup = groupId => async(dispath) => {
     }
 }
 
-const changePassword = (username, newPassword) => async(dispath) => {
+const changePassword = (username, newPassword) => async (dispath) => {
     dispath({
         type: constants.CHANGE_PASSWORD_REQUEST
     })
@@ -429,7 +400,7 @@ const changePassword = (username, newPassword) => async(dispath) => {
             payload: response.data
         })
 
-    }catch (error) {
+    } catch (error) {
         dispath({
             type: constants.CHANGE_PASSWORD_FAIL,
             payload: {

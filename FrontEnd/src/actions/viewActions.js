@@ -9,7 +9,7 @@ const toggleSidebar = () => {
 
 const toggleFormGroup = (isOpen) => {
     return {
-        type:actionTypes.TOGGLE_FROM_GROUP,
+        type: actionTypes.TOGGLE_FROM_GROUP,
         payload: {
             toggleOpenFormGroup: isOpen
         }

@@ -1,12 +1,13 @@
 import styled from "styled-components";
-import CustomInput from "../../../_sharecomponents/custominput/CustomInput";
-import FormGroup from "../../../_sharecomponents/formgroup/FromGroup";
-import CustomButton from "../../../_sharecomponents/custombutton/CustomButton";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { connect } from "react-redux";
 import { useEffect } from "react";
+
 import userActions from "../../../actions/userActions";
+import CustomInput from "../../../_sharecomponents/custominput/CustomInput";
+import FormGroup from "../../../_sharecomponents/formgroup/FromGroup";
+import CustomButton from "../../../_sharecomponents/custombutton/CustomButton";
 
 const PasswordChanging = (props) => {
     const username = localStorage.getItem('username');

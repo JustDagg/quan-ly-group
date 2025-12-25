@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const ConfirmDeleteModal = ({ show, onClose, onConfirm, groupName }) => {
     if (!show) {
         return null;
@@ -13,11 +11,11 @@ export const ConfirmDeleteModal = ({ show, onClose, onConfirm, groupName }) => {
                 left: 0,
                 right: 0,
                 bottom: 0,
-                backgroundColor: 'rgba(0, 0, 0, 0.6)', // Slightly darker overlay
+                backgroundColor: 'rgba(0, 0, 0, 0.6)',
                 display: 'flex',
                 justifyContent: 'center',
                 alignItems: 'center',
-                zIndex: 1000, // Ensure it's on top of other content
+                zIndex: 1000,
             }}
         >
             <div
@@ -27,10 +25,12 @@ export const ConfirmDeleteModal = ({ show, onClose, onConfirm, groupName }) => {
                     borderRadius: '8px',
                     width: '420px',
                     textAlign: 'center',
-                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)', // Subtle shadow
+                    boxShadow: '0 4px 15px rgba(0, 0, 0, 0.2)',
                 }}
             >
-                <h2 style={{ marginBottom: '20px', fontSize: '24px', color: '#333' }}>Confirm Delete Group</h2>
+                <h2 style={{ marginBottom: '20px', fontSize: '24px', color: '#333' }}>
+                    Confirm Delete Group
+                </h2>
                 <p style={{ fontSize: '16px', color: '#555' }}>
                     Are you sure you want to delete the group with name <strong>"{groupName}"</strong>?
                 </p>

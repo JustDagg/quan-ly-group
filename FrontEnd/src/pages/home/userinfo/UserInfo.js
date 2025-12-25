@@ -1,22 +1,14 @@
+import { connect } from "react-redux"
+import { useEffect, useState } from "react"
+import { RiFolderUploadFill } from 'react-icons/ri'
 import styled from "styled-components"
 
 import CustomInput from '../../../_sharecomponents/custominput/CustomInput'
-
 import FormGroup from '../../../_sharecomponents/formgroup/FromGroup'
-
 import Button from '../../../_sharecomponents/custombutton/CustomButton'
-
 import userActions from "../../../actions/userActions"
 
-import { connect } from "react-redux"
-import { useEffect, useState } from "react"
-
-import { RiFolderUploadFill } from 'react-icons/ri'
-
 const UserInfo = (props) => {
-
-    console.log(props)
-    
     const [user, setUser] = useState({
         firstName: '',
         lastName: '',
@@ -24,13 +16,10 @@ const UserInfo = (props) => {
         email: '',
         password: '',
         avatarUrl: ''
-    })    
+    })
 
     const [avatarUrl, setAvatarUrl] = useState('')
-
     const [avatarUploadFile, setAvatarUploadFile] = useState(null)
-
-    const [selectedFile, setSelectedFile] = useState(null)
 
     useEffect(() => {
         props.getUserInfo(localStorage.getItem('username'))
@@ -43,7 +32,7 @@ const UserInfo = (props) => {
             setAvatarUrl(temp[temp.length - 2] + '/' + temp[temp.length - 1])
         }
 
-        setUser({...props.user})
+        setUser({ ...props.user })
     }, [props.user])
 
     useEffect(() => {
@@ -51,7 +40,7 @@ const UserInfo = (props) => {
     }, [props.isLoading])
 
     const handleInputChange = (e) => {
-        setUser({...user, [e.target.name] : e.target.value})
+        setUser({ ...user, [e.target.name]: e.target.value })
     }
 
     const handleSubmitForm = (e) => {
@@ -65,7 +54,7 @@ const UserInfo = (props) => {
         setAvatarUrl(url)
     }
 
-    return(
+    return (
         <div className={props.className}>
             <div className='user-container'>
                 <div className="top">
@@ -73,12 +62,12 @@ const UserInfo = (props) => {
                 </div>
                 <div className="overlay-top"></div>
                 <div className="avatar">
-                    <img src = {avatarUrl} />
+                    <img src={avatarUrl} />
                     <div className="upload">
                         <label htmlFor="file_id">
-                            <RiFolderUploadFill color="gray" fontSize="1.2em" className="icon-upload"/>
+                            <RiFolderUploadFill color="gray" fontSize="1.2em" className="icon-upload" />
                         </label>
-                        <input type="file" name="file" id="file_id" onChange={onFileChange}/>
+                        <input type="file" name="file" id="file_id" onChange={onFileChange} />
                     </div>
                 </div>
                 <div className="icon-plus">
@@ -92,53 +81,50 @@ const UserInfo = (props) => {
                                 <p>{props.errorMessage.message}</p>
                             </div>
                         }
-                        {   !props.errorMessage &&
+                        {!props.errorMessage &&
                             <div className="about-user">
-                                <h1>ABOUT USER</h1>
-                                <p>
-                                    FrontEnd Developer@Creative-Tim • Major interest in Web 
-                                    Development: motivated to achieve measurable results, 
-                                    to deepen my knowledge and improve my skills.
-                                </p>        
+                                <h1>USER INFO</h1>
                             </div>
                         }
                         <div className="full-name">
                             <FormGroup>
-                                    <CustomInput type="text" 
-                                        label="First Name *" 
-                                        name="firstName"
-                                        value={user.firstName}
-                                        onChangeInput={handleInputChange}
-                                    />
+                                <CustomInput
+                                    type="text"
+                                    label="First Name *"
+                                    name="firstName"
+                                    value={user.firstName}
+                                    onChangeInput={handleInputChange}
+                                />
                             </FormGroup>
                             <FormGroup >
-                                    <CustomInput type="text" 
-                                        label="Last Name *" 
-                                        name="lastName" 
-                                        value={user.lastName}
-                                        onChangeInput={handleInputChange}
-                                    />
+                                <CustomInput
+                                    type="text"
+                                    label="Last Name *"
+                                    name="lastName"
+                                    value={user.lastName}
+                                    onChangeInput={handleInputChange}
+                                />
                             </FormGroup>
                         </div>
                         <FormGroup >
-                                <CustomInput type="text" 
-                                    label="Username *" 
-                                    name="username"
-                                    value={user.username}
-                                    onChangeInput={handleInputChange}
-                                />
+                            <CustomInput type="text"
+                                label="Username *"
+                                name="username"
+                                value={user.username}
+                                onChangeInput={handleInputChange}
+                            />
                         </FormGroup>
                         <FormGroup >
-                            <CustomInput type="email" 
-                                label="Email *" 
+                            <CustomInput type="email"
+                                label="Email *"
                                 name="email"
                                 value={user.email}
                                 onChangeInput={handleInputChange}
                             />
                         </FormGroup>
                         <FormGroup >
-                            <CustomInput type="password" 
-                                label="Password *" 
+                            <CustomInput type="password"
+                                label="Password *"
                                 name="password"
                                 value={user.password}
                                 onChangeInput={handleInputChange}
@@ -161,7 +147,7 @@ const UserInfo = (props) => {
     )
 }
 
-const StyledUserInfo = styled(UserInfo) `
+const StyledUserInfo = styled(UserInfo)`
     ${'' /* height: 100%; */}
     height: 800px;
     width: 560px;
@@ -209,7 +195,6 @@ const StyledUserInfo = styled(UserInfo) `
     .icon-plus span {
         font-size: 1.6rem;
     }
-
 
     .avatar {
         width: 130px;

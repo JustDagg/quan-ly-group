@@ -1,20 +1,17 @@
-import './Sidebar.css';
-import { MdControlCamera } from 'react-icons/md';
-import CustomLink from '../../../_sharecomponents/customlinks/CustomLink';
-import { menuLinks } from '../../../data/data';
-
 import { connect } from 'react-redux';
 
+import './Sidebar.css';
+import { menuLinks } from '../../../data/data';
 import CustomLinks2 from '../../../_sharecomponents/customlinks/CustomLinks2';
 
-const Sidebar = (props)=> {
-    return(
-        <div 
+const Sidebar = (props) => {
+    return (
+        <div
             className={
-                props.sidebarIsOpen ? 
-                'sidebar' : 'sidebar close'
+                props.sidebarIsOpen ?
+                    'sidebar' : 'sidebar close'
             }
-        >   
+        >
             <div className='sidebar-header'>
 
                 <h3>Group Management</h3>

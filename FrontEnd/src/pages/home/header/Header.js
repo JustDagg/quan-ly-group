@@ -1,25 +1,16 @@
+import { MdLogout } from 'react-icons/md';
+import { Avatar, Box, IconButton, Tooltip } from '@mui/material';
 import { MdMenu } from 'react-icons/md';
 import { useState } from 'react';
-
 import { Link } from 'react-router-dom';
-
-import Dropdown from '../dropdown/Dropdown';
-
-import './Header.css';
-
 import { connect } from 'react-redux';
 
+import Dropdown from '../dropdown/Dropdown';
+import './Header.css';
 import viewActions from '../../../actions/viewActions';
 
-import { MdLogout } from 'react-icons/md';
-
 const Header = (props) => {
-    const [sideIsOpen, setSidebarIsOpen] = useState(false)
     const clickMenuIcon = () => {
-        //setSidebarIsOpen(!sideIsOpen)
-
-        //props.clickMenuIcon(!isOpen)
-      
         props.toggleSidebar();
     }
 
@@ -34,7 +25,7 @@ const Header = (props) => {
     }
 
     const handleLogout = () => {
-        //clear data in localStorage
+        // clear data in localStorage
         localStorage.removeItem('username');
         localStorage.removeItem('token');
         localStorage.removeItem('role');
@@ -52,24 +43,52 @@ const Header = (props) => {
                     <Link to="/list-groups">List Groups</Link>
                     <Link to="/password-changing">Change Password</Link>
                 </div>
+
                 <div className='nav-right'>
-                    <div className='header-avatar' >
-                    <div className='icon-logout'> 
-                        <MdLogout 
-                        size={28}
-                        style={{cursor: 'pointer'}}
-                        onClick={handleLogout}
-                    />
-                    </div>
-                        <img src="../../images/avatar.png" onClick={_onClickAvatar}/>
-                    </div>
-                    {   
-                        dropdownIsOpen && <Dropdown setDropdownClose={handleClickOutSideDropdown}/>
+                    <Box
+                        className="header-avatar"
+                        sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            gap: 1.5,
+                        }}
+                    >
+                        <Tooltip title="Logout">
+                            <IconButton
+                                onClick={handleLogout}
+                                size="small"
+                                sx={{
+                                    color: "text.secondary",
+                                    "&:hover": {
+                                        bgcolor: "primary.main",
+                                        color: "#fff",
+                                    },
+                                }}
+                            >
+                                <MdLogout size={20} />
+                            </IconButton>
+                        </Tooltip>
+
+                        <Tooltip title="Account">
+                            <IconButton onClick={_onClickAvatar} size="small">
+                                <Avatar
+                                    src="../../images/avatar.png"
+                                    alt="avatar"
+                                    sx={{
+                                        width: 36,
+                                        height: 36,
+                                        border: "2px solid",
+                                        borderColor: "primary.main",
+                                    }}
+                                />
+                            </IconButton>
+                        </Tooltip>
+                    </Box>
+
+                    {
+                        dropdownIsOpen && <Dropdown setDropdownClose={handleClickOutSideDropdown} />
                     }
                 </div>
-            </div>
-            <div className='row-2'>
-                
             </div>
         </div>
     )
@@ -82,7 +101,5 @@ const mapDispatchToProps = (dispatch, props) => {
         }
     }
 }
-
-//export default Header;
 
 export default connect(null, mapDispatchToProps)(Header);

@@ -1,15 +1,16 @@
-import { Link } from 'react-router-dom'
-import './ListGroups.scss'
-import { MdEdit, MdOutlineDeleteForever, MdAddToPhotos, MdOutlineClose, MdRefresh } from 'react-icons/md'
-import FormGroupInfo from './FromGroupInfo'
+import { Button, FormControl, MenuItem, Paper, Select, Stack, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Tooltip, Typography } from '@mui/material'
+import { MdEdit, MdOutlineDeleteForever, MdAddToPhotos, MdRefresh } from 'react-icons/md'
 import { connect } from 'react-redux'
-import viewActions from '../../../actions/viewActions'
 import { useEffect, useState } from 'react'
 import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css"
 import ReactPaginate from 'react-paginate';
-import userActions from '../../../actions/userActions'
+
 import ConfirmDeleteModal from './ConfirmDeleteModal '
+import userActions from '../../../actions/userActions'
+import FormGroupInfo from './FromGroupInfo'
+import viewActions from '../../../actions/viewActions'
+import './ListGroups.scss'
 
 const ListGroups = (props) => {
     const [groupItem, setGroupItem] = useState({})
@@ -111,15 +112,35 @@ const ListGroups = (props) => {
         <div className="list-groups">
             <div className='content'>
                 {props.formGroupIsOpen && <FormGroupInfo groupItem={groupItem} buttonText={buttonText} />}
-                <div className='filter-form'>
-                    <div className='type-filter'>
-                        <select className='form-control-filter' value={type} onChange={onSelectChange}>
-                            <option value="Type" hidden>Type</option>
-                            <option value="BACKEND">BACKEND</option>
-                            <option value="FRONTEND">FRONTEND</option>
-                            <option value="FULLSTACK">FULLSTACK</option>
-                        </select>
-                    </div>
+
+                <Stack direction="row" alignItems="center" spacing={1}>
+                    <FormControl
+                        size="small"
+                        variant="outlined"
+                        sx={{ minWidth: 150, border: "1px solid lightgray" }}
+                    >
+                        <Select
+                            labelId="type-select-label"
+                            value={type}
+                            label="Select TYPE"
+                            displayEmpty
+                            onChange={onSelectChange}
+                            renderValue={(selected) => {
+                                if (!selected) {
+                                    return <span style={{ color: '#999' }}>Select TYPE</span>;
+                                }
+                                return selected;
+                            }}
+                        >
+                            <MenuItem value="" disabled>
+                                Select Type
+                            </MenuItem>
+                            <MenuItem value="BACKEND">BACKEND</MenuItem>
+                            <MenuItem value="FRONTEND">FRONTEND</MenuItem>
+                            <MenuItem value="FULLSTACK">FULLSTACK</MenuItem>
+                        </Select>
+                    </FormControl>
+
                     <DatePicker
                         className='form-control-filter'
                         selected={startDate}
@@ -128,6 +149,7 @@ const ListGroups = (props) => {
                         dateFormat="dd/MM/yyyy"
                         placeholderText='Start Date'
                     />
+
                     <DatePicker
                         className='form-control-filter'
                         selected={endDate}
@@ -136,68 +158,141 @@ const ListGroups = (props) => {
                         dateFormat="dd/MM/yyyy"
                         placeholderText='End Date'
                     />
-                    <button
-                        onClick={resetFilters}
-                        title='Reset filter'
-                        style={{
-                            marginLeft: '20px',
-                            backgroundColor: 'blue',
-                            color: '#fff',
-                            border: 'none',
-                            borderRadius: '50%',
-                            padding: '10px 10px',
-                            cursor: 'pointer',
-                            fontSize: '16px',
-                            transition: 'background-color 0.3s',
-                            display: 'flex',
-                            alignItems: 'center',
-                        }}
+
+                    <Tooltip
+                        title="Refresh"
+                        placement="top"
+                        arrow
                     >
-                        <MdRefresh />
-                    </button>
-                </div>
-                <div className='icon-add'>
-                    <MdAddToPhotos fontSize="1.2rem" style={{ cursor: 'pointer' }} onClick={handleClickAddGroup} />
-                </div>
-                <table>
-                    <thead>
-                        <tr>
-                            <th>STT</th>
-                            <th>Name</th>
-                            <th>Type</th>
-                            <th>Created Date</th>
-                            <th>Total Member</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {props.listGroups && props.listGroups.map((item, index) => (
-                            <tr key={item.id}>
-                                <td>{index + 1 + currentPage * PAGE_SIZE}</td>
-                                <td>{item.name}</td>
-                                <td>{item.type}</td>
-                                <td>{item.createdAt}</td>
-                                <td>{item.totalMember}</td>
-                                <td>
-                                    <MdEdit fontSize="1.2rem"
-                                        style={{ marginRight: '10px', cursor: 'pointer', color: 'green' }}
-                                        onClick={() => handleClickEdit(item)}
-                                    />
-                                    <MdOutlineDeleteForever fontSize="1.2rem"
-                                        style={{ marginLeft: '10px', cursor: 'pointer', color: 'red' }}
-                                        onClick={() => handleClickDelete(item)}
-                                    />
-                                </td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+                        <Button
+                            size="large"
+                            onClick={resetFilters}
+                            variant="contained"
+                            color="primary"
+                            startIcon={<MdRefresh />}
+                            sx={{
+                                borderRadius: 2,
+                                textTransform: 'none',
+                            }}
+                        >
+                            Refresh
+                        </Button>
+                    </Tooltip>
+
+                    <Tooltip
+                        title="Create group"
+                        placement="top"
+                        arrow
+                    >
+                        <Button
+                            size="large"
+                            variant="contained"
+                            color="primary"
+                            startIcon={<MdAddToPhotos />}
+                            onClick={handleClickAddGroup}
+                            sx={{
+                                borderRadius: 2,
+                                textTransform: 'none',
+                            }}
+                        >
+                            Create group
+                        </Button>
+                    </Tooltip>
+                </Stack>
+
+                <TableContainer
+                    component={Paper}
+                    elevation={0}
+                    sx={{
+                        borderRadius: 2,
+                        border: '1px solid #eee',
+                        mt: 2
+                    }}
+                >
+                    <Table>
+                        <TableHead>
+                            <TableRow sx={{ backgroundColor: '#f5f6fa' }}>
+                                <TableCell><b>ID</b></TableCell>
+                                <TableCell><b>Name</b></TableCell>
+                                <TableCell><b>Type</b></TableCell>
+                                <TableCell><b>Total Member</b></TableCell>
+                                <TableCell><b>Created Date</b></TableCell>
+                                <TableCell align="center"><b>Actions</b></TableCell>
+                            </TableRow>
+                        </TableHead>
+
+                        <TableBody>
+                            {props.listGroups && props.listGroups.map((item, index) => (
+                                <TableRow
+                                    key={item.id}
+                                    hover
+                                    sx={{ '&:hover': { backgroundColor: '#f9fbff' } }}
+                                >
+                                    <TableCell>
+                                        {index + 1 + currentPage * PAGE_SIZE}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item.name}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item.type}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item.totalMember}
+                                    </TableCell>
+                                    <TableCell>
+                                        {item.createdAt}
+                                    </TableCell>
+
+                                    <TableCell align="center">
+                                        <Stack direction="row" spacing={1}>
+                                            <Button
+                                                size="small"
+                                                variant="contained"
+                                                color="success"
+                                                startIcon={<MdEdit />}
+                                                onClick={() => handleClickEdit(item)}
+                                                sx={{
+                                                    textTransform: 'none',
+                                                    borderRadius: 2,
+                                                }}
+                                            >
+                                                Edit
+                                            </Button>
+
+                                            <Button
+                                                size="small"
+                                                variant="contained"
+                                                color="error"
+                                                startIcon={<MdOutlineDeleteForever />}
+                                                onClick={() => handleClickDelete(item)}
+                                                sx={{
+                                                    textTransform: 'none',
+                                                    borderRadius: 2,
+                                                }}
+                                            >
+                                                Delete
+                                            </Button>
+                                        </Stack>
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+                </TableContainer>
 
                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '50px' }}>
                     {/* Total Members */}
-                    <div className="total-members" style={{ marginBottom: '10px', fontSize: '16px' }}>
-                        <strong>Total Members: {calculateTotalMembers()} of page {currentPage + 1}</strong>
-                    </div>
+                    <Typography
+                        variant="body2"
+                        sx={{ mb: 1.5, fontWeight: 500 }}
+                    >
+                        Total Members:&nbsp;
+                        <Typography component="span" color="primary" fontWeight={600}>
+                            {calculateTotalMembers()}
+                        </Typography>
+                        &nbsp;of page {currentPage + 1}
+                    </Typography>
 
                     {/* Pagination */}
                     <div className='paging'>

@@ -4,9 +4,7 @@ import styled from 'styled-components'
 
 const CustomInputNonOutline = (props) => {
     const [inputFocus, setInputFocus] = useState(false)
-
     const [inputActive, setInputActive] = useState(false)
-
     const [value, setValue] = useState(props.value)
 
     const handleInputFocus = () => {
@@ -17,7 +15,7 @@ const CustomInputNonOutline = (props) => {
         setInputFocus(false)
         if (value != null && value !== '') {
             setInputActive(true)
-        }else {
+        } else {
             setInputActive(false)
         }
     }
@@ -30,21 +28,21 @@ const CustomInputNonOutline = (props) => {
     useEffect(() => {
         setValue(props.value)
         handleInputBlur()
-        if ((value == null || value === '') && (props.value != null && props.value !== '')){
+        if ((value == null || value === '') && (props.value != null && props.value !== '')) {
             setInputActive(true)
         }
     }, [props.value])
 
     return (
         <InputNonOutline inputFocus={inputFocus}>
-            <Label 
+            <Label
                 inputFocus={inputFocus}
                 inputActive={inputActive}
             >
                 {props.label}
             </Label>
-            <input 
-                type={props.type} 
+            <input
+                type={props.type}
                 name={props.name}
                 value={value}
                 onFocus={handleInputFocus}
@@ -55,7 +53,7 @@ const CustomInputNonOutline = (props) => {
     )
 }
 
-const InputNonOutline = styled.div `
+const InputNonOutline = styled.div`
     border-bottom: 1px solid lightgray;
     ${'' /* width: ${p => p.inputFocus ? '100%' : '200px'}; */}
     ${'' /* width: 100%; */}
@@ -83,7 +81,7 @@ const InputNonOutline = styled.div `
         padding-bottom: 2px;
     }
 `
-const Label = styled.label `
+const Label = styled.label`
     color: rgba(0, 0, 0, .36);
     font-size: 1rem;
     position: absolute;

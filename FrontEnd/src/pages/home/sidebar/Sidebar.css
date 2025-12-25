@@ -13,7 +13,7 @@
     box-shadow: 2px 0 10px rgba(0, 0, 0, 0.5);
 }
 
-.sidebar.close { 
+.sidebar.close {
     transform: translateX(-100%);
 }
 
@@ -51,7 +51,7 @@
     background-color: #3a3f4a;
 }
 
-.dashboard span:last-child { 
+.dashboard span:last-child {
     background-color: #39f;
     padding: 2px 6px;
     border-radius: 4px;
@@ -67,7 +67,7 @@
     border-top: 1px solid #394a63;
 }
 
-.sidebar-bottom h4 { 
+.sidebar-bottom h4 {
     text-transform: uppercase;
     font-size: 1rem;
     color: #ffffff;

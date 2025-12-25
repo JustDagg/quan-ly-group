@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const defaultOtions = {
-    baseUrl:process.env.API_BASE_URL,
+    baseUrl: process.env.API_BASE_URL,
     headers: {
         'Content-Type': 'application/json'
     }
@@ -9,17 +9,17 @@ const defaultOtions = {
 
 const fetcher = axios.create(defaultOtions);
 
-fetcher.interceptors.request.use(function(config) {
+fetcher.interceptors.request.use(function (config) {
     const token = localStorage.getItem('token');
     config.headers.Authorization = token ? `Bearer ${token}` : ''
     return config;
 })
 
 fetcher.interceptors.response.use(
-    function(response) {
+    function (response) {
         return response
     },
-    function(error) {
+    function (error) {
         return error;
     }
 )
