@@ -7,6 +7,7 @@ import CustomInput from '../../../_sharecomponents/custominput/CustomInput'
 import FormGroup from '../../../_sharecomponents/formgroup/FromGroup'
 import Button from '../../../_sharecomponents/custombutton/CustomButton'
 import userActions from "../../../actions/userActions"
+import { TextField, Typography } from "@mui/material"
 
 const UserInfo = (props) => {
     const [user, setUser] = useState({
@@ -108,7 +109,7 @@ const UserInfo = (props) => {
                                 />
                             </FormGroup>
                         </div>
-                        <FormGroup >
+                        <FormGroup>
                             <CustomInput type="text"
                                 label="Username *"
                                 name="username"
@@ -116,7 +117,16 @@ const UserInfo = (props) => {
                                 onChangeInput={handleInputChange}
                             />
                         </FormGroup>
-                        <FormGroup >
+                        <FormGroup>
+                            <TextField
+                                label="Role"
+                                value={user.role}
+                                variant="filled"
+                                fullWidth
+                                disabled
+                            />
+                        </FormGroup>
+                        <FormGroup>
                             <CustomInput type="email"
                                 label="Email *"
                                 name="email"
@@ -124,7 +134,7 @@ const UserInfo = (props) => {
                                 onChangeInput={handleInputChange}
                             />
                         </FormGroup>
-                        <FormGroup >
+                        <FormGroup>
                             <CustomInput type="password"
                                 label="Password *"
                                 name="password"
@@ -139,7 +149,9 @@ const UserInfo = (props) => {
                                 width="100%"
                                 onClick={handleSubmitForm}
                             >
-                                update
+                                <Typography variant="body2" color="white">
+                                    update
+                                </Typography>
                             </Button>
                         </div>
                     </form>

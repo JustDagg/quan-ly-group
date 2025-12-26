@@ -113,7 +113,7 @@ const ListGroups = (props) => {
             <div className='content'>
                 {props.formGroupIsOpen && <FormGroupInfo groupItem={groupItem} buttonText={buttonText} />}
 
-                <Stack direction="row" alignItems="center" spacing={1}>
+                <Stack direction="row" alignItems="center" spacing={1} mt={5}>
                     <FormControl
                         size="small"
                         variant="outlined"
@@ -150,54 +150,58 @@ const ListGroups = (props) => {
                         placeholderText='Start Date'
                     />
 
-                    <DatePicker
-                        className='form-control-filter'
-                        selected={endDate}
-                        onChange={handleEndDateChange}
-                        name="endDate"
-                        dateFormat="dd/MM/yyyy"
-                        placeholderText='End Date'
-                    />
+                    <Stack direction="row" alignItems="center" spacing={3}>
+                        <DatePicker
+                            className='form-control-filter'
+                            selected={endDate}
+                            onChange={handleEndDateChange}
+                            name="endDate"
+                            dateFormat="dd/MM/yyyy"
+                            placeholderText='End Date'
+                        />
 
-                    <Tooltip
-                        title="Refresh"
-                        placement="top"
-                        arrow
-                    >
-                        <Button
-                            size="large"
-                            onClick={resetFilters}
-                            variant="contained"
-                            color="primary"
-                            startIcon={<MdRefresh />}
-                            sx={{
-                                borderRadius: 2,
-                                textTransform: 'none',
-                            }}
-                        >
-                            Refresh
-                        </Button>
-                    </Tooltip>
+                        <Stack direction="row" alignItems="center" spacing={1}>
+                            <Tooltip
+                                title="Refresh"
+                                placement="top"
+                                arrow
+                            >
+                                <Button
+                                    size="large"
+                                    onClick={resetFilters}
+                                    variant="contained"
+                                    color="primary"
+                                    startIcon={<MdRefresh />}
+                                    sx={{
+                                        borderRadius: 2,
+                                        textTransform: 'none',
+                                    }}
+                                >
+                                    Refresh
+                                </Button>
+                            </Tooltip>
 
-                    <Tooltip
-                        title="Create group"
-                        placement="top"
-                        arrow
-                    >
-                        <Button
-                            size="large"
-                            variant="contained"
-                            color="primary"
-                            startIcon={<MdAddToPhotos />}
-                            onClick={handleClickAddGroup}
-                            sx={{
-                                borderRadius: 2,
-                                textTransform: 'none',
-                            }}
-                        >
-                            Create group
-                        </Button>
-                    </Tooltip>
+                            <Tooltip
+                                title="Create group"
+                                placement="top"
+                                arrow
+                            >
+                                <Button
+                                    size="large"
+                                    variant="contained"
+                                    color="primary"
+                                    startIcon={<MdAddToPhotos />}
+                                    onClick={handleClickAddGroup}
+                                    sx={{
+                                        borderRadius: 2,
+                                        textTransform: 'none',
+                                    }}
+                                >
+                                    Create group
+                                </Button>
+                            </Tooltip>
+                        </Stack>
+                    </Stack>
                 </Stack>
 
                 <TableContainer
@@ -245,7 +249,7 @@ const ListGroups = (props) => {
                                     </TableCell>
 
                                     <TableCell align="center">
-                                        <Stack direction="row" spacing={1}>
+                                        <Stack direction="row" spacing={2}>
                                             <Button
                                                 size="small"
                                                 variant="contained"

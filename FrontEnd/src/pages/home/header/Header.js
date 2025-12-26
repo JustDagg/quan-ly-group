@@ -52,7 +52,7 @@ const Header = (props) => {
                     <Link to="/dashboard">Dashboard</Link>
                     <Link to="/user-info">User Info</Link>
                     <Link to="/list-groups">List Groups</Link>
-                    <Link to="/password-changing">Change Password</Link>
+                    <Link to="/change-password">Change Password</Link>
                 </div>
 
                 <div className='nav-right'>
